@@ -179,10 +179,10 @@ def run(app_config, options):
                 response = pbclient.create_app(app_config['name'],
                                                app_config['short_name'],
                                                app_config['description'])
-
                 check_api_error(response)
                 app = setup_app()
-            except:
+            except Exception as e:
+		print(e)
                 format_error("pbclient.create_app", response)
         else:
             app = find_app_by_short_name()
