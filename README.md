@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-PyBossa demo application Flickr Person
+PyBossa demo application Flickr Person in Facebook
 ======================================
 
 This application has three files:
@@ -22,7 +21,7 @@ Then, you can follow the next steps:
 
 *  Create an account in PyBossa
 *  Copy under your account profile your API-KEY
-*  Run python createTasks.py -u http://crowdcrafting.org -k API-KEY
+*  Run python createTasks.py -s http://localhost/pybossa -k API-KEY -c
 *  Open with your browser the Applications section and choose the FlickrPerson app. This will open the presenter for this demo application.
 
 Documentation
@@ -46,6 +45,3 @@ The thumbnail has been created using a [photo](http://www.flickr.com/photos/mcgr
 
 **Note**: You can see the results of the CrowdCrafting app [here](http://dev.pybossa.com/app-flickrperson/results.html)
 =======
-app-flickrperson
-================
->>>>>>> a71c3f1e2ce503dd81b5d1367c77d925fc30e65c
