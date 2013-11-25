@@ -3,27 +3,17 @@
 <head>
 
 <!-- Le styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link
-        href="http://pybossa.socientize.eu/pybossa/static/vendor/bootstrap.min.css"
-        rel="stylesheet" type="text/css">
-<link
-        href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
-        rel="stylesheet">
-<link
-        href="http://pybossa.socientize.eu/pybossa/static/css/fonts/stylesheet.css"
-        rel="stylesheet">
-<link href="http://pybossa.socientize.eu/pybossa/static/css/styles.css"
-        rel="stylesheet"> 
+	href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+	rel="stylesheet">
+<link href="css/fonts/stylesheet.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
 
 <!-- Le javascript -->
-<script type="text/javascript"
-        src="http://pybossa.socientize.eu/pybossa/static/vendor/jquery.js"></script>
-<style type="text/css"></style>
-<script type="text/javascript"
-        src="http://pybossa.socientize.eu/pybossa/static/vendor/bootstrap/2.2.1/js/bootstrap.js"></script>
-
-<script src="http://localhost/pybossa/static/js/pybossa/pybossa.js"
-        type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/pybossa.js" ></script>
 
 <style type="text/css">
 
@@ -51,7 +41,7 @@
 	                                    data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 	                                    class="icon-bar"></span> <span class="icon-bar"></span>
 	                            </a> <a class="brand" href="http://www.socientize.eu/"><img
-	                                    src="http://pybossa.socientize.eu/pybossa/static/img/logo_societic.png"
+	                                    src="img/logo_societic.png"
 	                                    alt="Socientize"></a>
 	                    </div>
 	            </div>
@@ -73,64 +63,72 @@
 			<div class="row">
 				<div class="span3">
 					<a href="http://ec.europa.eu/"><img
-						src="http://pybossa.socientize.eu/pybossa/static/img/commlogo.jpg"></a>
+						src="img/commlogo.jpg"></a>
 				</div>
 				<div class="span3">
 					<a href="http://cordis.europa.eu/fp7/home_en.html"><img
-						src="http://pybossa.socientize.eu/pybossa/static/img/fp7logo.jpg"></a>
+						src="img/fp7logo.jpg"></a>
 				</div>
 				<div class="span3">
 					<a href="http://europa.eu/"><img
-						src="http://pybossa.socientize.eu/pybossa/static/img/eulogo.jpg"></a>
+						src="img/eulogo.jpg"></a>
 				</div>
 				<div class="span3">
 					<a href="http://pybossa.com/"><img
-						src="http://pybossa.socientize.eu/pybossa/static/img/pybossa.png"></a>
+						src="img/pybossa.png"></a>
 				</div>
 			</div>
 		</div>
 	</footer>
 
 	<script type="text/javascript" charset="utf-8">
-	
-		var task_shortname = "flickrperson";
-		var endpoint = "/pybossa";
+		var app_shortname;
+		var successfullyLogged = false;
+
+		$.getJSON("fb_config.json",
+				function(json) {
+					app_shortname = json.shortname;
+					fb_app_id = json.app_id;
+					pybossa.setEndpoint(json.endpoint);
+					initFacebookSDK(json.app_id, json.facebook_permissions_type);
+		});
+
 		var numOfTaskRunDone = 0;
-		
+
 		$("#task-template").load("template.html", function() {
 			console.log("Task template carregado");
 		});
-		
+
 		$("#long-description-content").load("long_description.html", function() {
-			console.log("Long description carregado");
+					console.log("Long description carregado");
 		});
+
+		function FinishedTaskCallback() {}
 		
-		function FinishedTaskCallback() {
-		}
 		FinishedTaskCallback.prototype.finished = function() {
 			// Load a new task
-			pybossa.newTask(task_shortname).done(function(data) {
+			pybossa.newTask(app_shortname).done(function(data) {
 				loadData(data, new FinishedTaskCallback());
 			});
 		}
-		
+
 		function checkUserProgress() {
-		    pybossa.userProgress(task_shortname).done(function(data){
-		    	numOfTaskRunDone = data.done;
-		    });
+			pybossa.userProgress(app_shortname).done(function(data) {
+				numOfTaskRunDone = data.done;
+			});
 		}
-		
+
 		function loadTutorial() {
 			$("#task-tutorial").load("tutorial.html", function() {
 				console.log("Tutorial carregado");
 			});
 		}
-		
+
 		function showTaskTemplate() {
 			if (numOfTaskRunDone == 0) {
 				loadTutorial();
 			}
-			$("#task-template").show();	
+			$("#task-template").show();
 			$("#task-long-description").hide();
 		}
 	</script>
@@ -138,20 +136,24 @@
 	<!--Facebook Login Code-->
 	<div id="fb-root"></div>
 	<script type="text/javascript" charset="utf-8">
+		var fb_permissions;
+		var fb_app_id;
+		
+		function initFacebookSDK(app_id, permissions) {
+			fb_app_id = app_id;
+			fb_permissions = {'scope' :	permissions};
+			
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId : fb_app_id,
+					status : false, // check login status
+					cookie : true, // enable cookies to allow the server to access the session
+					xfbml : true
+				});
 
-		var successfullyLogged = false;
-		var permissions = {scope: 'email'};
-
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId : '549612841794811',
-				status : false, // check login status
-				cookie : true, // enable cookies to allow the server to access the session
-				xfbml : true
-			});
-
-			FB.getLoginStatus(handleAuthChange);
-		};
+				FB.getLoginStatus(handleAuthChange);
+			};
+		}
 
 		// Load the SDK asynchronously
 		(function(d) {
@@ -171,37 +173,41 @@
 			if (response.status === 'connected' && !successfullyLogged) {
 				processLogin(response.authResponse);
 			} else if (response.status === 'not_authorized') {
-				FB.login(handleAuthChange, permissions);
+				FB.login(handleAuthChange, fb_permissions);
 			} else {
-				FB.login(handleAuthChange, permissions);
+				FB.login(handleAuthChange, fb_permissions);
 			}
 		}
 
 		function processLogin(authResponse) {
 			console.log(authResponse);
-			$.ajax({
-				url : "https://graph.facebook.com/me?access_token=" + authResponse.accessToken,
-				dataType : 'json'
-			}).pipe(function (response) {
-				var authData = {
-					'facebook_user_id' : response.id,
-					'email' : response.email,
-					'name' : response.name
-				};
+			$.ajax(
+					{
+						url : "https://graph.facebook.com/me?access_token="
+								+ authResponse.accessToken,
+						dataType : 'json'
+					}).pipe(
+					function(response) {
+						var authData = {
+							'facebook_user_id' : response.id,
+							'email' : response.email,
+							'name' : response.name
+						};
 
-				pybossa.authenticateUser(authData, function(answer) {
-					successfullyLogged = true;
-					FB.Event.subscribe('auth.authResponseChange', handleAuthChange);
-					
-					checkUserProgress();
+						pybossa.authenticateUser(authData, function(answer) {
+							successfullyLogged = true;
+							FB.Event.subscribe('auth.authResponseChange',
+									handleAuthChange);
 
-					// Show PyBossa Task
-					pybossa.newTask(task_shortname).done(function(data) {
-						loadData(data, new FinishedTaskCallback());
-						$("#task-content").show();
+							checkUserProgress();
+
+							// Show PyBossa Task
+							pybossa.newTask(app_shortname).done(function(data) {
+								loadData(data, new FinishedTaskCallback());
+								$("#task-content").show();
+							});
+						});
 					});
-				});
-			});
 		}
 	</script>
 </body>
