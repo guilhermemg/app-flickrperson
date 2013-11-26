@@ -45,15 +45,15 @@ Then, you can follow the next steps:
 ===== Back to Pybossa Server on fb_config.json.template ===============
 
 1.  Change the name of the file fb_config.json.template to fb_config.json
-2.   ```bash
+   ```bash
       $ mv fb_config.json.template fb_config.json
      ``` 
-3.  Copy your facebook app id, that you see in Facebook App Dashboard 
-4.  Set your endpoint, used by Pybossa in this server
-5.  Set your app Shortname
-6.  Set your facebook permissions type, according to your needs and how you configured on facebook
+2.  Copy your facebook app id, that you see in Facebook App Dashboard 
+3.  Set your endpoint, used by Pybossa in this server
+4.  Set your app Shortname
+5.  Set your facebook permissions type, according to your needs and how you configured on facebook
     - **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
-7.  Create an Alias in file the /etc/apache2/sites-available/<your pybossa site> of Pybossa to the folder 
+6.  Create an Alias in file the /etc/apache2/sites-available/<your pybossa site> of Pybossa to the folder 
 fb-templates that hosts your Pybossa, for example: 
      * Alias /flickrperson /home/user/app-flickrperson/static/fb-templates
 
@@ -81,7 +81,3 @@ Please, see the COPYING file.
 Acknowledgments
 ===============
 The thumbnail has been created using a [photo](http://www.flickr.com/photos/mcgraths/3289448299/) from Sean McGrath (license CC BY 2.0). 
-
-
-**Note**: You can see the results of the CrowdCrafting app [here](http://dev.pybossa.com/app-flickrperson/results.html)
-=======
