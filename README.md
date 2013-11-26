@@ -13,8 +13,6 @@ This application has some files:
 *  static/fb-templates/index.html: template exhibit in facebook
 *  static/fb_config.json.template: template of setup file to facebook interaction
 
-NOTE: IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE
-
 ![alt screenshot](http://i.imgur.com/63SmFEu.png)
 
 Testing the application
@@ -29,37 +27,42 @@ Then, you can follow the next steps:
 
 ===== On Pybossa Server ================================================
 
-*  Create an account in PyBossa
-*  Copy under your account profile your API-KEY
-*  Run python createTasks.py -s http://localhost/pybossa -k API-KEY -c
+1.  Create an account in PyBossa
+2.  Copy under your account profile your API-KEY
+3.  Run python createTasks.py -s http://localhost/pybossa -k API-KEY -c
 
 ===== On Facebook App Dashboard ========================================
 
-*  Create a facebook app that will represent your app (https://developers.facebook.com/apps)
-     NOTE: you need be registered as a developer on facebook to create your application on it
-*  Register your app domain, for example: pybossa.socientize.eu
-*  Register the URL in app configurations pointing to location of your app in Pybossa Server, for example:
- http://pybossa.socientize.eu/flickrperson/
-*  Register the secure URL, for example: https://pybossa.socientize.eu/flickrperson
-     NOTE: to works with secure URL you need to install a SSL certificate, for that, see this tutorial: ________
+1. Create a facebook app that will represent your app (https://developers.facebook.com/apps)
+     **NOTE**: you need be registered as a developer on facebook to create your application on it
+2. Register your app domain, for example: pybossa.socientize.eu
+3. Register the URL in app configurations pointing to location of your app in Pybossa Server, for example:
+   * http://pybossa.socientize.eu/flickrperson/
+4. Register the secure URL, for example: https://pybossa.socientize.eu/flickrperson
+     **NOTE**: to works with secure URL you need to install a SSL certificate, for that, see this tutorial: ________
 
 
-===== Back to Pybossa Server on fb_config.json.template =======
+===== Back to Pybossa Server on fb_config.json.template ===============
 
-*  Change the name of the file fb_config.json.template to fb_config.json
+1.  Change the name of the file fb_config.json.template to fb_config.json
+2.   ```bash
       $ mv fb_config.json.template fb_config.json
-      
-*  Copy your facebook app id, that you see in Facebook App Dashboard, 
-*  Set your endpoint, used by Pybossa in this server
-*  Set your app Shortname
-*  Set your facebook permissions type, according to your needs and how you configured on facebook
-     NOTE: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
-*  Create an Alias in file the /etc/apache2/sites-available/<your pybossa site> of Pybossa to the folder 
+     ``` 
+3.  Copy your facebook app id, that you see in Facebook App Dashboard 
+4.  Set your endpoint, used by Pybossa in this server
+5.  Set your app Shortname
+6.  Set your facebook permissions type, according to your needs and how you configured on facebook
+     **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
+7.  Create an Alias in file the /etc/apache2/sites-available/<your pybossa site> of Pybossa to the folder 
 fb-templates that hosts your Pybossa, for example: 
-      Alias /flickrperson /home/user/app-flickrperson/static/fb-templates
+     * Alias /flickrperson /home/user/app-flickrperson/static/fb-templates
 
-===== Back to Facebook =====
+===== Back to Facebook ================================================
 *  Test the link for your application, for example: https://apps.facebook.com/flickrperson
+
+
+**NOTE**: IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE
+
 
 Documentation
 =============
