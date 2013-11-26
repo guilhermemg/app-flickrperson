@@ -34,12 +34,12 @@ Then, you can follow the next steps:
 ===== On Facebook App Dashboard ========================================
 
 1. Create a facebook app that will represent your app (https://developers.facebook.com/apps)
-     **NOTE**: you need be registered as a developer on facebook to create your application on it
+    - **NOTE**: you need be registered as a developer on facebook to create your application on it
 2. Register your app domain, for example: pybossa.socientize.eu
 3. Register the URL in app configurations pointing to location of your app in Pybossa Server, for example:
    * http://pybossa.socientize.eu/flickrperson/
 4. Register the secure URL, for example: https://pybossa.socientize.eu/flickrperson
-     **NOTE**: to works with secure URL you need to install a SSL certificate, for that, see this tutorial: ________
+    - **NOTE**: to works with secure URL you need to install a SSL certificate, for that, see this tutorial: ________
 
 
 ===== Back to Pybossa Server on fb_config.json.template ===============
@@ -52,7 +52,7 @@ Then, you can follow the next steps:
 4.  Set your endpoint, used by Pybossa in this server
 5.  Set your app Shortname
 6.  Set your facebook permissions type, according to your needs and how you configured on facebook
-     **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
+    - **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
 7.  Create an Alias in file the /etc/apache2/sites-available/<your pybossa site> of Pybossa to the folder 
 fb-templates that hosts your Pybossa, for example: 
      * Alias /flickrperson /home/user/app-flickrperson/static/fb-templates
@@ -61,7 +61,7 @@ fb-templates that hosts your Pybossa, for example:
 *  Test the link for your application, for example: https://apps.facebook.com/flickrperson
 
 
-**NOTE**: IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE
+- **NOTE**: **IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE**
 
 
 Documentation
