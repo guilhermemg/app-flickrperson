@@ -45,16 +45,18 @@ Then, you can follow the next steps:
 ===== Back to Pybossa Server on fb_config.json.template ===============
 
 1.  Change the name of the file fb_config.json.template to fb_config.json
+    
     ```bash
         $ mv fb_config.json.template fb_config.json
     ``` 
+
 2.  Copy your facebook app id, that you see in Facebook App Dashboard 
 3.  Set your endpoint, used by Pybossa in this server
 4.  Set your app Shortname
 5.  Set your facebook permissions type, according to your needs and how you configured on facebook
     - **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
-6.  Create an Alias in file the /etc/apache2/sites-available/your_pybossa_site of Pybossa to the folder 
-fb-templates that hosts your Pybossa, for example: 
+6.  Create an Alias in file the /etc/apache2/sites-available/your_pybossa_site of Apache Server to the folder 
+fb-templates of your application, for example: 
      * Alias /flickrperson /home/user/app-flickrperson/static/fb-templates
 
 ===== Back to Facebook ================================================
