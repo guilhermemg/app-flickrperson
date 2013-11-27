@@ -3,17 +3,33 @@ PyBossa demo application Flickr Person in Facebook
 
 This application has some files:
 
+*Normal files*
 *  createTasks.py: for creating the application in PyBossa, and fill it with some tasks.
 *  template.html: the view for every task and deal with the data of the answers.
 *  tutorial.html: a simple tutorial for the volunteers.
+*  long_description.html: long description of your app
+
+*New files*
 *  static/fb-templates: templates used in facebook interface
 *  static/fb-templates/css: fonts used
 *  static/fb-templates/js: javascript files used
 *  static/fb-templates/img: images used in templates
 *  static/fb-templates/index.html: template exhibit in facebook
+*  static/fb-templates/long_description.html: long description template of your app
+*  static/fb-templates/template.html: template of your app
+*  static/fb-templates/tutorial.html: tutorial of your app
 *  static/fb_config.json.template: template of setup file to facebook interaction
 
-![alt screenshot](http://i.imgur.com/63SmFEu.png)
+- **NOTE**: the long description, tutorial and template html's can be a copy of the normal files
+
+![alt screenshot](http://apps.facebook.com/flickrperson/img/flickrperson_screenshot.png)
+
+New Pybossa and Pybossa.js
+==========================
+You need install the new version of [pybossa.js](https://github.com/adabriand/pybossa.js) and the new [pybossa api](https://github.com/adabriand/pybossa) to run your app on facebook. 
+Upgrade it on your pybossa server.
+
+- **NOTE**: **IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE**
 
 Testing the application
 =======================
@@ -63,7 +79,21 @@ fb-templates of your application, for example:
 *  Test the link for your application, for example: https://apps.facebook.com/flickrperson
 
 
-- **NOTE**: **IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE**
+Repositories
+============
+*New Pybossa.js*
+* https://github.com/adabriand/pybossa.js
+
+*New Pybossa (pybossa.api)*
+* https://github.com/adabriand/pybossa
+
+*App-flickrperson to Facebook* 
+* https://github.com/guilhermemg/app-flickrperson
+
+
+App running on facebook
+=======================
+* http://apps.facebook.com/flickrperson/
 
 
 Documentation
