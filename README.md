@@ -4,32 +4,32 @@ PyBossa demo application Flickr Person in Facebook
 This application has some files:
 
 *Normal files*
-*  createTasks.py: for creating the application in PyBossa, and fill it with some tasks.
-*  template.html: the view for every task and deal with the data of the answers.
+*  createTasks.py: creates the application in PyBossa, and fills it with some tasks.
+*  template.html: the view for every task. It deals with the data of the answers.
 *  tutorial.html: a simple tutorial for the volunteers.
-*  long_description.html: long description of your app
+*  long_description.html: a long description of your app.
 
 *New files*
-*  static/fb-templates: templates used in facebook interface
-*  static/fb-templates/css: fonts used
-*  static/fb-templates/js: javascript files used
-*  static/fb-templates/img: images used in templates
-*  static/fb-templates/index.html: template exhibit in facebook
-*  static/fb-templates/long_description.html: long description template of your app
-*  static/fb-templates/template.html: template of your app
-*  static/fb-templates/tutorial.html: tutorial of your app
-*  static/fb_config.json.template: template of setup file to facebook interaction
+*  static/fb-templates: templates used in Facebook interface.
+*  static/fb-templates/css: fonts used.
+*  static/fb-templates/js: javascript files used.
+*  static/fb-templates/img: images used in templates.
+*  static/fb-templates/index.html: base template for the Facebook application. It loads the developer defined html files: long_description, template and tutorial.
+*  static/fb-templates/long_description.html: long description template of your Facebook app.
+*  static/fb-templates/template.html: task viewer template of your Facebook app.
+*  static/fb-templates/tutorial.html: tutorial of your Facebook app.
+*  static/fb_config.json.template: setup file for the Facebook app.
 
-- **NOTE**: the long description, tutorial and template html's can be a copy of the normal files
+- **NOTE**: the long description, tutorial and template's html can be a copy of the normal files.
 
-![alt screenshot](http://apps.facebook.com/flickrperson/img/flickrperson_screenshot.png)
+![alt screenshot](http://img89.imageshack.us/img89/9881/gcjt.png)
 
 New Pybossa and Pybossa.js
 ==========================
-You need install the new version of [pybossa.js](https://github.com/adabriand/pybossa.js) and the new [pybossa api](https://github.com/adabriand/pybossa) to run your app on facebook. 
-Upgrade it on your pybossa server.
+You need to install the new version of [pybossa.js](https://github.com/adabriand/pybossa.js) and the new [pybossa api](https://github.com/adabriand/pybossa) to run your app on facebook. 
+Upgrade it on your PyBossa server.
 
-- **NOTE**: **IT IS NOT POSSIBLE TO CREATE LINKS TO PAGES HOSTED IN	PYBOSSA SITE**
+- **NOTE**: **WE DO NOT RECOMMEND TO OPEN LINKS, INSIDE YOUR FACEBOOK APP IFRAME, TO PAGES HOSTED IN PYBOSSA SITE.**
 
 Testing the application
 =======================
@@ -52,10 +52,10 @@ Then, you can follow the next steps:
 1. Create a facebook app that will represent your app (https://developers.facebook.com/apps)
     - **NOTE**: you need be registered as a developer on facebook to create your application on it
 2. Register your app domain, for example: pybossa.socientize.eu
-3. Register the URL in app configurations pointing to location of your app in Pybossa Server, for example:
+3. Register the URL in the app configurations pointing to the location of your app in PyBossa Server, for example:
    * http://pybossa.socientize.eu/flickrperson/
 4. Register the secure URL, for example: https://pybossa.socientize.eu/flickrperson
-    - **NOTE**: to works with secure URL you need to install a SSL certificate, for that, see this tutorial: ________
+    - **NOTE**: Both servers that host your Facebook application and the PyBossa must have an SSL module enabled. You can follow [this tutorial](https://www.digitalocean.com/community/articles/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-12-04) of how to create and configure SSL certificates on Apache Server on Ubuntu.
 
 
 ===== Back to Pybossa Server on fb_config.json.template ===============
@@ -68,10 +68,10 @@ Then, you can follow the next steps:
 
 2.  Copy your facebook app id, that you see in Facebook App Dashboard 
 3.  Set your endpoint, used by Pybossa in this server
-4.  Set your app Shortname
-5.  Set your facebook permissions type, according to your needs and how you configured on facebook
+4.  Set your PyBossa App Shortname
+5.  Set your Facebook permissions type, according to your needs and how you configured on Facebook
     - **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
-6.  Create an Alias in file the /etc/apache2/sites-available/your_pybossa_site of Apache Server to the folder 
+6.  Create an Alias in file the /etc/apache2/sites-available/your_pybossa_site of the Apache Server to the folder 
 fb-templates of your application, for example: 
      * Alias /flickrperson /home/user/app-flickrperson/static/fb-templates
 
