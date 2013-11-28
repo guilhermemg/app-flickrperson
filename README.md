@@ -4,16 +4,16 @@ PyBossa demo application Flickr Person in Facebook
 This application has some files:
 
 *Normal files*
-*  createTasks.py: creates the application in PyBossa, and fills it with some tasks.
+*  createTasks.py: creates the application in the PyBossa, and fills it with some tasks.
 *  template.html: the view for every task. It deals with the data of the answers.
 *  tutorial.html: a simple tutorial for the volunteers.
 *  long_description.html: a long description of your app.
 
 *New files*
-*  static/fb-templates: templates used in Facebook interface.
+*  static/fb-templates: templates used in the Facebook interface.
 *  static/fb-templates/css: fonts used.
 *  static/fb-templates/js: javascript files used.
-*  static/fb-templates/img: images used in templates.
+*  static/fb-templates/img: images used in the templates.
 *  static/fb-templates/index.html: base template for the Facebook application. It loads the developer defined html files: long_description, template and tutorial.
 *  static/fb-templates/long_description.html: long description template of your Facebook app.
 *  static/fb-templates/template.html: task viewer template of your Facebook app.
@@ -26,7 +26,7 @@ This application has some files:
 
 New Pybossa and Pybossa.js
 ==========================
-You need to install the new version of [pybossa.js](https://github.com/adabriand/pybossa.js) and the new [pybossa api](https://github.com/adabriand/pybossa) to run your app on facebook. 
+You need to install the new version of [pybossa.js](https://github.com/adabriand/pybossa.js) and the new [pybossa api](https://github.com/adabriand/pybossa) to run your app on Facebook. 
 Upgrade it on your PyBossa server.
 
 - **NOTE**: **WE DO NOT RECOMMEND TO OPEN LINKS, INSIDE YOUR FACEBOOK APP IFRAME, TO PAGES HOSTED IN PYBOSSA SITE.**
@@ -43,14 +43,14 @@ Then, you can follow the next steps:
 
 ===== On Pybossa Server ================================================
 
-1.  Create an account in PyBossa
+1.  Create an account in the PyBossa
 2.  Copy under your account profile your API-KEY
 3.  Run python createTasks.py -s http://localhost/pybossa -k API-KEY -c
 
 ===== On Facebook App Dashboard ========================================
 
-1. Create a facebook app that will represent your app (https://developers.facebook.com/apps)
-    - **NOTE**: you need be registered as a developer on facebook to create your application on it
+1. Create a Facebook app that will represent your app (https://developers.facebook.com/apps)
+    - **NOTE**: you need be registered as a developer on Facebook to create your application on it
 2. Register your app domain, for example: pybossa.socientize.eu
 3. Register the URL in the app configurations pointing to the location of your app in PyBossa Server, for example:
    * http://pybossa.socientize.eu/flickrperson/
@@ -66,8 +66,8 @@ Then, you can follow the next steps:
         $ mv fb_config.json.template fb_config.json
     ``` 
 
-2.  Copy your facebook app id, that you see in Facebook App Dashboard 
-3.  Set your endpoint, used by Pybossa in this server
+2.  Copy your Facebook app id, that you see in Facebook App Dashboard 
+3.  Set your endpoint, used by PyBossa in this server
 4.  Set your PyBossa App Shortname
 5.  Set your Facebook permissions type, according to your needs and how you configured on Facebook
     - **NOTE**: types of permissions can be checked here: https://developers.facebook.com/docs/reference/login/ 
@@ -91,7 +91,7 @@ Repositories
 * https://github.com/guilhermemg/app-flickrperson
 
 
-App running on facebook
+App running on Facebook
 =======================
 * http://apps.facebook.com/flickrperson/
 
@@ -112,4 +112,4 @@ Please, see the COPYING file.
 
 Acknowledgments
 ===============
-The thumbnail has been created using a [photo](http://www.flickr.com/photos/mcgraths/3289448299/) from Sean McGrath (license CC BY 2.0). 
+The thumbnail has been created using a [photo](http://www.flickr.com/photos/mcgraths/3289448299/) from Sean McGrath (license CC BY 2.0).
