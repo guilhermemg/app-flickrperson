@@ -77,59 +77,6 @@
 	</div>
 	</footer>
 
-	<script type="text/javascript" charset="utf-8">
-		var app_shortname;
-		var successfullyLogged = false;
-
-		$.getJSON("fb_config.json", function(json) {
-			app_shortname = json.shortname;
-			fb_app_id = json.app_id;
-			pybossa.setEndpoint(json.endpoint);
-			initFacebookSDK(json.app_id, json.facebook_permissions_type);
-		});
-
-		var numOfTaskRunDone = 0;
-
-		$("#task-template").load("template.html", function() {
-			console.log("Task template carregado");
-		});
-
-		$("#long-description-content").load("long_description.html",
-				function() {
-					console.log("Long description carregado");
-				});
-
-		function FinishedTaskCallback() {
-		}
-
-		FinishedTaskCallback.prototype.finished = function() {
-			// Load a new task
-			pybossa.newTask(app_shortname).done(function(data) {
-				loadData(data, new FinishedTaskCallback());
-			});
-		}
-
-		function checkUserProgress() {
-			pybossa.userProgress(app_shortname).done(function(data) {
-				numOfTaskRunDone = data.done;
-			});
-		}
-
-		function loadTutorial() {
-			$("#task-tutorial").load("tutorial.html", function() {
-				console.log("Tutorial carregado");
-			});
-		}
-
-		function showTaskTemplate() {
-			if (numOfTaskRunDone == 0) {
-				loadTutorial();
-			}
-			$("#task-template").show();
-			$("#task-long-description").hide();
-		}
-	</script>
-
 	<!--Facebook Login Code-->
 	<div id="fb-root"></div>
 	<script type="text/javascript" charset="utf-8">
@@ -190,14 +137,14 @@
 						var authData = {
 							'facebook_user_id' : response.id,
 							'email' : response.email,
-							'name' : response.name
+							'name' : response.username,
+							'full_name' : response.name
 						};
 
-						pybossa.authenticateUser(authData, function(answer) {
+						pybossa.authenticateFacebookUser(authData, function(answer) {
 							successfullyLogged = true;
 							FB.Event.subscribe('auth.authResponseChange',
 									handleAuthChange);
-
 							checkUserProgress();
 
 							// Show PyBossa Task
@@ -207,6 +154,50 @@
 							});
 						});
 					});
+		}
+	</script>
+	
+	<!-- PyBossa Application Template Load -->
+	<script type="text/javascript" charset="utf-8">
+		var app_shortname;
+		var successfullyLogged = false;
+		var numOfTaskRunDone = 0;
+
+		$.getJSON("fb_config.json", function(json) {
+			app_shortname = json.shortname;
+			fb_app_id = json.app_id;
+			pybossa.setEndpoint(json.endpoint);
+			initFacebookSDK(json.app_id, json.facebook_permissions_type);
+		});
+
+		$("#task-template").load("template.html");
+		$("#long-description-content").load("long_description.html");
+
+		function FinishedTaskCallback() {}
+
+		FinishedTaskCallback.prototype.finished = function() {
+			// Load a new task
+			pybossa.newTask(app_shortname).done(function(data) {
+				loadData(data, new FinishedTaskCallback());
+			});
+		}
+
+		function checkUserProgress() {
+			pybossa.userProgress(app_shortname).done(function(data) {
+				numOfTaskRunDone = data.done;
+			});
+		}
+
+		function loadTutorial() {
+			$("#task-tutorial").load("tutorial.html");
+		}
+
+		function showTaskTemplate() {
+			if (numOfTaskRunDone == 0) {
+				loadTutorial();
+			}
+			$("#task-template").show();
+			$("#task-long-description").hide();
 		}
 	</script>
 </body>

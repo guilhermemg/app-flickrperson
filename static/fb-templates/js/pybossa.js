@@ -33,7 +33,7 @@
 		});
 	}
 
-	function addFbParameters(restParameters) {
+	function addFacebookParameters(restParameters) {
 		if (user_facebook_id != "") {
 			var connector = restParameters.length == 0 ? "" : "&";
 			restParameters += connector + "facebook_user_id="
@@ -44,7 +44,7 @@
 
 	function getTaskRun(app) {
 		var restParameters = "";
-		restParameters = addFbParameters(restParameters);
+		restParameters = addFacebookParameters(restParameters);
 
 		return $.ajax({
 			url : url + 'api/app/' + app.id + '/newtask',
@@ -112,7 +112,7 @@
 
 	function userProgress(appname) {
 		var restParameters = "";
-		restParameters = addFbParameters(restParameters);
+		restParameters = addFacebookParameters(restParameters);
 		
 		return $.ajax({
 			url : url + 'api/app/' + appname + '/userprogress',
@@ -253,7 +253,7 @@
 
 	pybossa.getCurrentUserId = function(callback) {
 		var restParameters = "";
-		restParameters = addFbParameters(restParameters);
+		restParameters = addFacebookParameters(restParameters);
 		
 		var response = $.ajax({
 			url : url + 'api/app/get_current_user_id',
@@ -264,11 +264,11 @@
 		});
 	}
 	
-	pybossa.authenticateUser = function(authData, callback) {
+	pybossa.authenticateFacebookUser = function(authData, callback) {
 		restParameters = JSON.stringify(authData);
 		return $.ajax({
 			type : 'POST',
-			url : url + 'api/user/authenticate',
+			url : url + 'api/user/authenticate_facebook_user',
 			data : restParameters,
 			contentType : 'application/json',
 			dataType : 'json'
