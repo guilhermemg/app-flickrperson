@@ -46,12 +46,16 @@
 	</header>
 
 	<div id="task-long-description" class="container">
-		<div id="long-description-info">
-			<a class="btn btn-primary pull-right" onclick="showTaskTemplate()"><i
-				class="icon-thumbs-up" style="color: white;"></i> Start Contributing
-				Now!</a>
+		<div class="well">
+			<div id="long-description-info" style="height: 50px;">
+				<span
+					style="font-size: 28px; line-height: 26px; float: left; font-weight: bold;">Flickr
+					Person </span> <a class="btn btn-primary pull-right"
+					onclick="startAuthentication()"><i class="icon-thumbs-up"
+					style="color: white;"></i> Start Contributing Now!</a>
+			</div>
+			<div id="long-description-content"></div>
 		</div>
-		<div id="long-description-content"></div>
 	</div>
 
 	<div id="task-template" class="container" style="display: none;"></div>
@@ -89,31 +93,29 @@
 				'scope' : permissions
 			};
 
-			window.fbAsyncInit = function() {
-				FB.init({
-					appId : fb_app_id,
-					status : false, // check login status
-					cookie : true, // enable cookies to allow the server to access the session
-					xfbml : true
-				});
-
-				FB.getLoginStatus(handleAuthChange);
-			};
+			// Load the SDK asynchronously
+			(function(d) {
+				var js, id = 'facebook-jssdk', ref = d
+						.getElementsByTagName('script')[0];
+				if (d.getElementById(id)) {
+					return;
+				}
+				js = d.createElement('script');
+				js.id = id;
+				js.async = true;
+				js.src = "//connect.facebook.net/en_US/all.js";
+				ref.parentNode.insertBefore(js, ref);
+			}(document));
 		}
 
-		// Load the SDK asynchronously
-		(function(d) {
-			var js, id = 'facebook-jssdk', ref = d
-					.getElementsByTagName('script')[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement('script');
-			js.id = id;
-			js.async = true;
-			js.src = "//connect.facebook.net/en_US/all.js";
-			ref.parentNode.insertBefore(js, ref);
-		}(document));
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : fb_app_id,
+				status : false, // check login status
+				cookie : true, // enable cookies to allow the server to access the session
+				xfbml : true
+			});
+		};
 
 		function handleAuthChange(response) {
 			if (response.status === 'connected' && !successfullyLogged) {
@@ -140,27 +142,26 @@
 							'full_name' : response.name
 						};
 
-						pybossa.authenticateFacebookUser(authData, function(answer) {
+						pybossa.authenticateFacebookUser(authData, function(
+								answer) {
 							successfullyLogged = true;
 							FB.Event.subscribe('auth.authResponseChange',
 									handleAuthChange);
 							checkUserProgress();
-
-							// Show PyBossa Task
-							pybossa.newTask(app_shortname).done(function(data) {
-								loadData(data, new FinishedTaskCallback());
-								$("#task-content").show();
-							});
+							showTaskTemplate();
 						});
 					});
 		}
+
+		function startAuthentication() {
+			FB.getLoginStatus(handleAuthChange);
+		}
 	</script>
-	
+
 	<!-- PyBossa Application Template Load -->
 	<script type="text/javascript" charset="utf-8">
 		var app_shortname;
 		var successfullyLogged = false;
-		var numOfTaskRunDone = 0;
 
 		$.getJSON("fb_config.json", function(json) {
 			app_shortname = json.shortname;
@@ -169,10 +170,10 @@
 			initFacebookSDK(json.app_id, json.facebook_permissions_type);
 		});
 
-		$("#task-template").load("template.html");
 		$("#long-description-content").load("long_description.html");
 
-		function FinishedTaskCallback() {}
+		function FinishedTaskCallback() {
+		}
 
 		FinishedTaskCallback.prototype.finished = function() {
 			// Load a new task
@@ -183,7 +184,10 @@
 
 		function checkUserProgress() {
 			pybossa.userProgress(app_shortname).done(function(data) {
-				numOfTaskRunDone = data.done;
+				var numOfTaskRunDone = data.done;
+				if (numOfTaskRunDone == 0) {
+					loadTutorial();
+				}
 			});
 		}
 
@@ -192,11 +196,16 @@
 		}
 
 		function showTaskTemplate() {
-			if (numOfTaskRunDone == 0) {
-				loadTutorial();
-			}
-			$("#task-template").show();
 			$("#task-long-description").hide();
+			$("#task-template").show();
+
+			$("#task-template").load("template.html", function() {
+				// Show PyBossa Task
+				pybossa.newTask(app_shortname).done(function(data) {
+					loadData(data, new FinishedTaskCallback());
+					$("#task-content").show();
+				});
+			});
 		}
 	</script>
 </body>
